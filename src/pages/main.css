@@ -1,0 +1,56 @@
+.form-container{
+    width: 400px;
+    margin: 10% auto;
+    box-shadow: 0 4px 8px rgba(0,0,0,.2);
+    padding: 25px;
+}
+.input-group input{
+    width: 100%;
+    margin: 14px 0;
+    padding: 14px;
+}
+.input-group-2{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 5px;
+}
+.form-container button,.hero-container button{
+    width: 100%;
+    padding: 14px 28px;
+    margin: 14px 0;
+    background-color: rgb(11, 133, 72);
+    color: white;
+    border: 0;
+    border-radius: 5px;
+    cursor: pointer;
+}
+.p-1{
+    text-align: center;
+    margin: 12px 0;
+}
+.form-container a{
+    color: rgb(11, 133, 72);
+}
+
+/* hero-container */
+.hero-container{
+    height: 91vh;
+    background: linear-gradient(rgba(0,0,0,.5),rgba(0,0,0,.6)),url('https://nov-minicom.myshopify.com/cdn/shop/files/home5-lookbook1.jpg?v=1753174278&width=2048');
+    background-position: center;
+    text-align: center;
+    align-content: center;
+    color: white;
+}
+.hero-container p{
+    margin: 14px auto;
+    width: 35%;
+    font-size: 19px;
+}
+.hero-container h1{
+    font-size: 80px;
+}
+.hero-container button{
+    width: 220px;
+    letter-spacing: 2px;
+}
