@@ -13,10 +13,11 @@ const Header = () => {
         </div>
         <div className="nav-links">
             <Link to='/' >Home</Link>
-            <Link to='/my-products' >Products</Link>
+            <Link to='/products' >Products</Link>
             <Link to='/collections' >Collections</Link>
             <Link to='/about' >About Us</Link>
             <Link to='/contact' >Contact</Link>
+            <Link to='/manage-products' >Admin</Link>
         </div>
         <div className="btns">
           <button onClick={()=>navigate('/login')}>Login</button>
