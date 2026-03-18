@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-
+import './main.css';
 const Products = () => {
 
   const [products,setProducts] = useState(()=>{
@@ -9,7 +9,10 @@ const Products = () => {
 
   return (
     <div>
-      <h1>Explore Our Products</h1>
+      <div className="hero-title">
+         <h1>Upgrade Your Home with Premium Furniture</h1>
+         <p>Shop high-quality furniture at unbeatable prices. From sofas to dining sets, find everything you need to create your dream home.</p>
+      </div>
       <div className="product-container">
         {
           products.map((p)=>(
@@ -17,8 +20,8 @@ const Products = () => {
               <img src={p.image} alt="" />
               <div className="product-info">
                 <h3>{p.name}</h3>
-                <h3>{p.description}</h3>
-                <h3>{p.category}</h3>
+                <p>{p.description}</p>
+                <p>{p.category}</p>
                 <div className="bottom">
                   <p>Price:₹{p.price}</p>
                   <div className="btns">

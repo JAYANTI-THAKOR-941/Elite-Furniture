@@ -27,3 +27,9 @@ button{
 table tr td img{
     width: 150px;
 }
+.title{
+    margin: 5%;
+}
+.title h1{
+    margin-bottom: 20px;
+}

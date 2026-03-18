@@ -16,19 +16,34 @@ const ProductManagement = () => {
 
     const [open, setOpen] = useState(false);
 
+    const [editId, setEditId] = useState(null);
+
     const handleSubmit = (e) => {
         e.preventDefault();
 
-        const newProduct = {
-            id: Date.now(),
-            name: name,
-            description: description,
-            category: category,
-            price: price,
-            image: image
-        }
+        if (editId) {
+            const updatedProduct = products.map((p) => {
+                if (p.id === editId) {
+                    return { id: editId, name, description, category, price, image }
+                }
+                return p;
+            })
+            setProducts(updatedProduct);
+            setEditId(null);
+            setOpen(false);
 
-        setProducts([...products, newProduct]);
+        } else {
+            const newProduct = {
+                id: Date.now(),
+                name: name,
+                description: description,
+                category: category,
+                price: price,
+                image: image
+            }
+
+            setProducts([...products, newProduct]);
+        }
         setName("");
         setDescription("");
         setPrice("");
@@ -36,7 +51,15 @@ const ProductManagement = () => {
         setImage("");
     }
 
-
+    const handleEdit = (p) => {
+        setOpen(true);
+        setEditId(p.id);
+        setName(p.name);
+        setDescription(p.description);
+        setPrice(p.price);
+        setCategory(p.category);
+        setImage(p.image);
+    }
 
     const handleDelete = (id) => {
         const filterProduct = products.filter((p) => p.id !== id);
@@ -48,8 +71,10 @@ const ProductManagement = () => {
     }, [products])
     return (
         <>
-            <h1>Product Management</h1>
-            <button onClick={()=>setOpen(true)}>Add New Product</button>
+            <div className="title">
+                <h1>Product Management</h1>
+                <button onClick={() => setOpen(true)}>Add New Product</button>
+            </div>
             <table>
                 <tr>
                     <th>Image</th>
@@ -67,7 +92,7 @@ const ProductManagement = () => {
                             <td>{p.description}</td>
                             <td>{p.category}</td>
                             <td>{p.price}</td>
-                            <td><button>Edit</button></td>
+                            <td><button onClick={() => handleEdit(p)}>Edit</button></td>
                             <td><button style={{ backgroundColor: "red" }} onClick={() => handleDelete(p.id)}>Delete</button></td>
                         </tr>
                     ))
@@ -75,14 +100,14 @@ const ProductManagement = () => {
             </table>
 
             {open && <form onSubmit={handleSubmit}>
-                <h1>Add New Product</h1>
+                {editId ? <h1>Update Product</h1> : <h1>Add New Product</h1>}
                 <input type="text" placeholder="Enter product name" value={name} onChange={(e) => setName(e.target.value)} />
                 <input type="text" placeholder="Enter product description" value={description} onChange={(e) => setDescription(e.target.value)} />
                 <input type="text" placeholder="Enter product category" value={category} onChange={(e) => setCategory(e.target.value)} />
                 <input type="text" placeholder="Enter product price" value={price} onChange={(e) => setPrice(e.target.value)} />
                 <input type="text" placeholder="Enter product image url" value={image} onChange={(e) => setImage(e.target.value)} />
-                <button>Add Product</button>
-                <button onClick={()=>setOpen(false)}>Cancel</button>
+                {editId ? <button>Update Product</button> : <button>Add New Product</button>}
+                <button onClick={() => setOpen(false)}>Cancel</button>
             </form>}
         </>
     )
