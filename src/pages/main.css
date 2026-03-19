@@ -87,3 +87,13 @@
 .hero-title h1{
     margin-bottom: 20px;
 }
+
+.search-container{
+    display: flex;
+    justify-content: space-around;
+    padding: 50px;
+}
+.search-container input,.search-container select{
+    width: 20%;
+    padding: 12px;
+}
