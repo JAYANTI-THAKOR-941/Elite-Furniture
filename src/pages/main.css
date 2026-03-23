@@ -97,3 +97,14 @@
     width: 20%;
     padding: 12px;
 }
+
+/* product-desc */
+.product-desc{
+    display: flex;
+    margin: 5%;
+    justify-content:center;
+    gap: 100px;
+}
+.product-img img{
+    width: 500px;
+}

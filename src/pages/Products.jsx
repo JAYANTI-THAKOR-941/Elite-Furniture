@@ -1,5 +1,6 @@
 import React, { useState } from 'react'
 import './main.css';
+import { useNavigate } from 'react-router-dom';
 const Products = () => {
 
   const [products,setProducts] = useState(()=>{
@@ -7,6 +8,7 @@ const Products = () => {
     return allProducts ? JSON.parse(allProducts) : [];
   });
 
+  const navigate = useNavigate();
 
   const [search,setSearch] = useState("");
   const [category,setCategory] = useState("all");
@@ -36,7 +38,7 @@ const Products = () => {
       <div className="product-container">
         {
           filterProducts.map((p)=>(
-            <div className="card">
+            <div className="card" key={p.id}>
               <img src={p.image} alt="" />
               <div className="product-info">
                 <h3>{p.name}</h3>
@@ -45,7 +47,7 @@ const Products = () => {
                 <div className="bottom">
                   <p>Price:₹{p.price}</p>
                   <div className="btns">
-                    <button>View Details</button>
+                    <button onClick={()=>navigate(`/product/${p.id}`)}>View Details</button>
                   </div>
                 </div>
               </div>
