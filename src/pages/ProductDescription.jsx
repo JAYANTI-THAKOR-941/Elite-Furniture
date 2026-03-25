@@ -1,56 +1,62 @@
-
-import React, { useEffect, useState } from 'react'
-import { useParams } from 'react-router-dom'
+import React, { useEffect, useState } from "react";
+import { useDispatch } from "react-redux";
+import { useNavigate, useParams } from "react-router-dom";
+import { addToCart } from "../redux/cartSlice";
 
 const ProductDescription = () => {
+  const { id } = useParams();
 
-    const {id} = useParams();
+  const [product, setProduct] = useState(null);
+  const [error, setError] = useState("");
 
-    const [product,setProduct] = useState(null);
-    const [error,setError] = useState("");
+  const dispatch = useDispatch();
 
-    // console.log(id);
+  const navigate = useNavigate();
 
-    useEffect(()=>{
-        const allProducts = localStorage.getItem('allproducts');
+  // console.log(id);
 
-        if(allProducts){
-            const productArray = JSON.parse(allProducts);
+  useEffect(() => {
+    const allProducts = localStorage.getItem("allproducts");
 
-            const foundProduct = productArray.find((p)=>p.id == id);
+    if (allProducts) {
+      const productArray = JSON.parse(allProducts);
 
-            if(foundProduct){
-                setProduct(foundProduct);
-                setError("");
-            }
-            else{
-                setError("Product not found.!!");
-            }
+      const foundProduct = productArray.find((p) => p.id == id);
 
-        }
-        else{
-            setError("No data in localstorage.!!")
-        }
+      if (foundProduct) {
+        setProduct(foundProduct);
+        setError("");
+      } else {
+        setError("Product not found.!!");
+      }
+    } else {
+      setError("No data in localstorage.!!");
+    }
+  }, [id]);
 
-    },[id])
-
- 
-    if (!product ) return <h2>Product not found.!!</h2>
-    if(error) return <h2>{error}</h2>
+  if (!product) return <h2>Product not found.!!</h2>;
+  if (error) return <h2>{error}</h2>;
   return (
-    <div className='product-desc'>
-        <div className="product-img">
-           <img src={product.image} alt="" />
-        </div>
-        <div className="product-info">
-            <h1>{product.name}</h1>
-            <p>{product.description}</p>
-            <p>Price:₹{product.price}</p>
-            <p>{product.category}</p>
-            <button>Add to Cart</button>
-        </div>
+    <div className="product-desc">
+      <div className="product-img">
+        <img src={product.image} alt="" />
+      </div>
+      <div className="product-info">
+        <h1>{product.name}</h1>
+        <p>{product.description}</p>
+        <p>Price:₹{product.price}</p>
+        <p>{product.category}</p>
+        <button
+          onClick={() => {
+            dispatch(addToCart(product));
+            navigate('/cart');
+          }}
+        >
+          Add to Cart
+        </button>
+      </div>
     </div>
-  )
-}
+  );
+};
 
-export default ProductDescription
+export default ProductDescription;

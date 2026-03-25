@@ -10,6 +10,7 @@ import Header from './components/Header'
 import Collections from './pages/Collections'
 import ProductManagement from './admin/ProductManagement'
 import ProductDescription from './pages/ProductDescription'
+import Cart from './pages/Cart'
 
 const App = () => {
   return (
@@ -18,6 +19,7 @@ const App = () => {
         <Routes>
           <Route path="/" element={<Home/>} />
           <Route path='/products' element={<Products/>} />
+          <Route path='/cart' element={<Cart/>} />
           <Route path='/product/:id' element={<ProductDescription/>} />
           <Route path='/about' element={<About/>} />
           <Route path='/contact' element={<Contact/>} />
